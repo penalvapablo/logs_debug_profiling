@@ -1,0 +1,37 @@
+.chat-messages {
+  border: 1px solid black;
+  padding: 12px;
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.author {
+  font-weight: bold;
+  color: blue;
+}
+
+.date {
+  color: brown;
+}
+
+.message {
+  font-style: italic;
+  color: green;
+}
+
+.bienvenido {
+  margin-top: 1rem;
+  background-color: rgb(141, 122, 177);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.desloguear{
+  background-color: red;
+}
+.desloguear:hover{
+  background-color: rgb(206, 147, 147);
+ 
+}
+

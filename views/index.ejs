@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="shortcut icon" href="#" />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="./index.js" defer></script>
+    <title>Sessions</title>
+  </head>
+  <body class="container">
+    <div class="container-fluid">
+      <div class="bienvenido">
+        <div>
+          <h1 class="fw-bold logged-message"> <%= mail %></h1>
+
+        </div>
+        <a href="/logout"
+          ><button class="btn btn-primary desloguear">Desloguear</button></a
+        >
+      </div>
+      <div id="productsList" class="text-light mt-4"></div>
+
+      <div class="chat pt-4 mb-2">
+        <h2 class="mb-4 mt-4">Centro de mensajes</h2>
+        <h2 class="mb-4 mt-4 compression"></h2>
+        <form class="chat-form">
+          <div class="mb-3">
+            <input
+              class="form-control"
+              type="email"
+              name="email"
+              required
+              placeholder="Ingrese su email..."
+            />
+          </div>
+
+          <hr />
+
+          <div class="mb-3">
+            <input
+              class="form-control"
+              type="text"
+              name="nombre"
+              required
+              placeholder="Ingrese su nombre..."
+            />
+          </div>
+
+          <hr />
+
+          <div class="mb-3">
+            <input
+              class="form-control"
+              type="text"
+              name="apellido"
+              required
+              placeholder="Ingrese su apellido..."
+            />
+          </div>
+
+          <hr />
+
+          <div class="mb-3">
+            <input
+              class="form-control"
+              type="number"
+              name="edad"
+              required
+              placeholder="Ingrese su edad..."
+            />
+          </div>
+
+          <hr />
+
+          <div class="mb-3">
+            <input
+              class="form-control"
+              type="text"
+              name="alias"
+              required
+              placeholder="Ingrese su alias..."
+            />
+          </div>
+
+          <hr />
+
+          <div class="mb-3">
+            <input
+              class="form-control"
+              type="text"
+              name="avatar"
+              required
+              placeholder="Ingrese su avatar..."
+            />
+          </div>
+
+          <hr />
+
+          <div class="chat-messages mb-3"></div>
+
+          <div class="row">
+            <div class="mb-3 col-auto">
+              <input
+                class="form-control"
+                type="text"
+                name="message"
+                required
+                placeholder="Ingrese un mensaje..."
+              />
+            </div>
+
+            <div class="col-auto">
+              <button class="btn btn-primary" type="submit">Enviar!</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
