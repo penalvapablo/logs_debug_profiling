@@ -4,15 +4,19 @@ const router = new Router();
 const bcrypt = require('bcrypt');
 const isRegistered = require('../../utils/isRegistered')
 // const users = await Users.find({mail: 'e@e'});
+const logger = require('../../utils/winston')
+
 
 module.exports = (app) => {
   app.use('/registro', router);
 
   router.get('/', (req, res) => {
+    logger.log('info', `ruta /registro, metodo get`);
     res.render('registro');
   });
 
   router.post('/', isRegistered, async (req, res) => {
+    logger.log('info', `ruta /api/registro, metodo post`);
     try {
       const { mail, password } = req.body;
       if (!mail || !mail.length) {

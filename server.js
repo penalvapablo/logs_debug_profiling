@@ -15,7 +15,7 @@ const { yargObj } = require('./utils/yargs');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 const compression = require('compression')
-
+const logger = require('./utils/winston')
 // Initializations
 const app = express();
 const httpServer = new HttpServer(app);
@@ -52,6 +52,7 @@ serverRoutes(app);
 
 /* SOCKETS */
 io.on('connection', async (socket) => {
+  logger.log('info', 'nuevo cliente conectado');
   // socket.emit('products', products);
 
   socket.emit('messages', normalizar(await chatController.listAll()));
@@ -80,7 +81,7 @@ io.on('connection', async (socket) => {
 });
 /* SOCKETS */
 
-const PORT = process.argv[2] || yargObj.port || 3000;
+const PORT = process.argv[2] || yargObj.port ;
 
 const mode = process.argv[3]?.toUpperCase() || yargObj.mode.toUpperCase();
 
@@ -88,15 +89,17 @@ const mode = process.argv[3]?.toUpperCase() || yargObj.mode.toUpperCase();
 
 if (mode === 'FORK') {
   const server = httpServer.listen(PORT, () => {
-    console.log(`Server on port ${PORT} || Worker ${process.pid} started!`);
+    logger.log(
+      'info', 
+      `Servidor inicializado en el puerto ${server.address().port} con pid ${process.pid}.`
+    );
   });
 
-  server.on('error', (e) => {
-    console.log('Error del servidor.');
-    // console.log(e);
+  server.on('error', (err) => {
+    logger.log('error', 'Error del servidor.' + err);
   });
   process.on('exit', (code) => {
-    console.log('Exit code -> ', code);
+    ogger.log('info', 'Exit code -> ' + code)
   });
 }
 if (mode === 'CLUSTER') {
@@ -109,20 +112,23 @@ if (mode === 'CLUSTER') {
       cluster.fork();
     }
     cluster.on('exit', (worker, code, signal) => {
-      console.log(`murió el subproceso ${worker.process.pid}`);
+      logger.log('warn', `worker ${worker.process.pid} died`);
       cluster.fork();
     });
   } else {
     const server = httpServer.listen(PORT, () => {
-      console.log(`Server on port ${PORT} || Worker ${process.pid} started!`);
+      logger.log(
+        'info',
+        `Servidor inicializado en el puerto ${server.address().port} con pid ${process.pid}.`
+      );
     });
 
-    server.on('error', (e) => {
-      console.log('Error del servidor.');
+    server.on('error', (err) => {
+      logger.log('error', 'Error del servidor.' + err)
       // console.log(e);
     });
     process.on('exit', (code) => {
-      console.log('Exit code -> ', code);
+      logger.log('info', 'Exit code -> ' + code)
     });
   }
 }

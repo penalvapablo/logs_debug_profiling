@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "test": "node benchmark.js",
+    "start": "0x server.js",
     "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "autocannon": "^7.6.0",
     "bcrypt": "^5.0.1",
     "compression": "^1.7.4",
     "connect-mongo": "^4.6.0",
@@ -28,6 +29,7 @@
     "mongoose": "^6.0.14",
     "normalizr": "^3.6.1",
     "socket.io": "^4.4.0",
+    "winston": "^3.4.0",
     "yargs": "^17.3.1"
   },
   "devDependencies": {

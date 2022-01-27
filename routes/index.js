@@ -5,6 +5,7 @@ const isLoggedIn = require('../utils/isLoggedIn');
 const authenticateToken = require('../utils/authenticateToken')
 const info = require('../components/info')
 const apiRandom = require('../components/api-randoms')
+const logger = require('../utils/winston')
 
 let user = ''
 
@@ -17,7 +18,6 @@ module.exports = (app) => {
   
   app.get('/auth', authenticateToken, (req, res) => {
     user = req.user
-    console.log(user)
     res.send('usuario validado');
   });
 
@@ -32,10 +32,11 @@ module.exports = (app) => {
     res.render('logout');
   });
 
-  app.get('*', (req, res) =>
+  app.get('*', (req, res)=>{
+    logger.log('warn', `ruta inexistente`)
     res.status(404).json({
       error: -2,
       description: `ruta ${req.originalUrl} método get no implementado`,
     })
-  );
+  })
 };
