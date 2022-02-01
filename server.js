@@ -81,7 +81,7 @@ io.on('connection', async (socket) => {
 });
 /* SOCKETS */
 
-const PORT = process.argv[2] || yargObj.port ;
+const PORT = process.argv[2] || process.env.PORT || yargObj.port ;
 
 const mode = process.argv[3]?.toUpperCase() || yargObj.mode.toUpperCase();
 
